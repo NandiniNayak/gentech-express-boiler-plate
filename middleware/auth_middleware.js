@@ -6,4 +6,14 @@ const authRedirect = (req, res, next) => {
 
     return next();
 }
-module.exports = authRedirect
+const authorize = (req, res, next) => {
+    if(req.session && !req.session.user) {
+        return res.redirect("/")
+    }
+    return next();
+}
+
+module.exports = {
+    authRedirect,
+    authorize
+}

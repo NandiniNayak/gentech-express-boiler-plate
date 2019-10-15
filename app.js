@@ -15,8 +15,6 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
-console.log("test");
-
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 

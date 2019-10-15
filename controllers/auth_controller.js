@@ -33,7 +33,6 @@ const loginCreate = async (req, res) => {
     // attach the user to the session
     req.session.user = user;
     res.redirect("/dashboard");
-    console.log("test");
     // res.json(req.body);
 }
 const logout = (req, res) => {
