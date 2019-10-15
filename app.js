@@ -2,6 +2,16 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 // const morgan = require("morgan");
 const app = express();
+// require the express session to keep track of the session on the server side
+const session = require('express-session');
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { expires: 600000 }
+    
+}))
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
