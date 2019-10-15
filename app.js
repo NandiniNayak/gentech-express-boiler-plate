@@ -4,14 +4,18 @@ const exphbs = require("express-handlebars");
 const app = express();
 // require the express session to keep track of the session on the server side
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require("mongoose");
 
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { expires: 600000 }
-    
+    cookie: { expires: 600000 },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
+
+console.log("test");
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
