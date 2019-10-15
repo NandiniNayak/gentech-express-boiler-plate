@@ -11,7 +11,7 @@ const registerCreate = async (req, res) => {
     // attach the registered user to the session
     req.session.user = user
     console.log(user);
-    res.redirect("/");
+    res.redirect("/dashboard");
 }
 
 const loginNew = (req, res) => {
