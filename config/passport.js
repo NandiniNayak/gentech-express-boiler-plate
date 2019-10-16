@@ -18,7 +18,7 @@ const User = require("../database/models/user_model");
 // ));
 
 passport.use(new LocalStrategy({
-    usernameField: email
+    usernameField: 'email'
 },
     async (email, password, done) => {
         let user = await User.findOne({email})

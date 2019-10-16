@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // app.use(morgan("combined"));
-app.use(require("./config/passport"));
+require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
