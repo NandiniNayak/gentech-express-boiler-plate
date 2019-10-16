@@ -14,10 +14,14 @@ router.get("/login", AuthController.loginNew);
 // router.post("/login", AuthController.loginCreate);
 
 // use passport local startegy on login
-router.post("/login", passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login'
-}))
+// router.post("/login", passport.authenticate('local', {
+//     successRedirect: '/dashboard',
+//     failureRedirect: '/login'
+// }))
+
+// use passport jwt strategy
+// router.post("/login",passport.authenticate('jwt', {session: false}), AuthController.loginCreate);
+router.post("/login", passport.authenticate('local', { failureRedirect: '/login', session: false }), AuthController.loginCreate)
 
 router.get("/logout", AuthController.logout);
 router.get("/dashboard", authorize, PageController.dashboard);
