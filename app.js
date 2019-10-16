@@ -7,6 +7,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require("mongoose");
 const passport = require("passport");
+const cookieParser = require('cookie-parser');
 
 app.use(session({
     secret: 'keyboard cat',
@@ -21,6 +22,7 @@ app.set("view engine", "handlebars");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 
 // app.use(morgan("combined"));
 require("./config/passport");

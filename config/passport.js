@@ -5,7 +5,14 @@ const JwtStrategy = require('passport-jwt').Strategy,
 const User = require("../database/models/user_model");
 
 var opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = (req) => {
+    let token = null;
+    if(req && req.cookies) {
+        token = req.cookies["jwt"];
+    }
+    return token
+}
+// opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = 'secretkey';
 
 // const passport = require('passport');
@@ -48,7 +55,7 @@ passport.use(new LocalStrategy({
 ))
 // uses json web token based function
 passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-    User.findOne({ id: jwt_payload.sub }, function (err, user) {
+    User.findById(jwt_payload.sub , function (err, user) {
         if (err) {
             return done(err, false);
         }
@@ -60,3 +67,4 @@ passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
         }
     });
 }));
+

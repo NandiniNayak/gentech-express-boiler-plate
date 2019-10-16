@@ -45,9 +45,11 @@ const loginNew = (req, res) => {
 // }
 
 const loginCreate = async (req,res) => {
-    const token = jwt.sign({sub: req.user._id}, "secretkey");
+    const token = jwt.sign({sub: req.user._id}, 'secretkey');
     console.log("token", token);
-    res.json(token);
+    // res.json(token);
+    res.cookie("jwt", token);
+    res.redirect('/dashboard');
     // sign the user details to generate json web token
 }
 const logout = (req, res) => {
@@ -56,6 +58,8 @@ const logout = (req, res) => {
     // })
     // passport logout
     req.logout();
+    // remove jwt from cookie
+    res.cookie("jwt", null, { maxAge: -1 });
     res.redirect("/");
 }
 

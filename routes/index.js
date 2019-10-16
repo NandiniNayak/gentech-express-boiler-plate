@@ -24,6 +24,6 @@ router.get("/login", AuthController.loginNew);
 router.post("/login", passport.authenticate('local', { failureRedirect: '/login', session: false }), AuthController.loginCreate)
 
 router.get("/logout", AuthController.logout);
-router.get("/dashboard", authorize, PageController.dashboard);
+router.get("/dashboard", passport.authenticate('jwt', {session: false}), PageController.dashboard);
 
 module.exports = router;
