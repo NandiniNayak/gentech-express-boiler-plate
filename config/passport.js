@@ -17,6 +17,18 @@ const User = require("../database/models/user_model");
 //     }
 // ));
 
+// attach the user to the session
+passport.serializeUser(function (user, done) {
+    done(null, user._id);
+});
+
+// fetch user from the session
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
+        done(err, user);
+    });
+});
+
 passport.use(new LocalStrategy({
     usernameField: 'email'
 },
