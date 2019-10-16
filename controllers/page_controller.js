@@ -2,8 +2,8 @@ const index = (req, res) => {
     // req.session.user ? res.redirect("/") : res.render("auth/register");
     // req.session.views = req.session.views ? req.session.views + 1 : 1;
     // res.json(req.session.views);
-    res.json(req.user);
-    // res.render("page/home");
+    // res.json(req.user);
+    res.render("page/home");
 }
 
 const dashboard = (req, res) => {

@@ -9,7 +9,13 @@ const registerCreate = async (req, res) => {
     // let encrypetPassword = password.
     let user = await User.create({email, password});
     // attach the registered user to the session
-    req.session.user = user
+    // req.session.user = user
+    // passport login
+    req.login(user, (err) => {
+        if(err) {
+            return next(err);
+        }
+    })
     console.log(user);
     res.redirect("/dashboard");
 }
@@ -36,9 +42,12 @@ const loginCreate = async (req, res) => {
     // res.json(req.body);
 }
 const logout = (req, res) => {
-    req.session.destroy(() => {
-        res.redirect("/");
-    })
+    // req.session.destroy(() => {
+    //     res.redirect("/");
+    // })
+    // passport logout
+    req.logout();
+    res.redirect("/");
 }
 
 
