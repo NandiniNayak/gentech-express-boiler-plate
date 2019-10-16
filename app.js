@@ -6,6 +6,7 @@ const app = express();
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 app.use(session({
     secret: 'keyboard cat',
@@ -22,6 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // app.use(morgan("combined"));
+app.use(require("./config/passport"));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(require("./routes"));
 
